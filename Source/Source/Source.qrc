@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="Source">
+    <file>radiant-gradient.svg</file>
+  </qresource>
+</RCC>
