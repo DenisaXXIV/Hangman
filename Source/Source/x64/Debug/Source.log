@@ -1,9 +1,2 @@
-﻿  Reading Qt configuration (C:/Qt/5.15.0/msvc2019_64/bin/qmake)
-  uic Source.ui
-  rcc Source.qrc
-  moc Source.h
-  Source.cpp
-  main.cpp
-  qrc_Source.cpp
-  moc_Source.cpp
+﻿  Source.cpp
   Source.vcxproj -> D:\Proiecte\Hangman-Spanzuratoarea\Source\x64\Debug\Source.exe
