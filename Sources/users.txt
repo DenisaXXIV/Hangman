@@ -1,0 +1,14 @@
+[
+{
+  "Username": "John Doe",
+  "Points": "12",
+  "ProfilePic": "D:/Proiecte/Hangman-Spanzuratoarea/images/users's pics/user(1)",
+  "SavedGames": ""
+},
+{
+  "Username": "John Boe",
+  "Points": "12",
+  "ProfilePic": "D:/Proiecte/Hangman-Spanzuratoarea/images/users's pics/user(1)",
+  "SavedGames": ""
+}
+]

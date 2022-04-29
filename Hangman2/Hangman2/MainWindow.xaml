@@ -1,0 +1,522 @@
+﻿<Window x:Class="Hangman2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hangman2.ViewModels"
+        mc:Ignorable="d"
+        Title="Hangman" Height="500" Width="850">
+    <Window.DataContext>
+        <local:GameViewModel/>
+    </Window.DataContext>
+    <Grid Background="#F5FBEF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Background="#9D69A3"
+              Grid.Row="0" 
+              Grid.ColumnSpan="2">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+
+            <MenuItem Header="File" 
+                      Background="#5A3A31"
+                      Foreground="#F5FBEF"
+                      FontSize="22" >
+                <MenuItem Header="New Game" 
+                          Command="{Binding ReloadGame}"/>
+                <MenuItem Header="Open Game" />
+                <MenuItem Header="Save Game" />
+                <Separator/>
+                <MenuItem Header="Statistics" />
+                <Separator/>
+                <MenuItem Header="Exit" 
+                          Command="{Binding ExitCommand}"/>
+            </MenuItem>
+
+            <MenuItem Header="Categories" 
+                      Background="#5A3A31"
+                      Foreground="#F5FBEF"
+                      FontSize="22">
+                <MenuItem Header="+4 years">
+                    <MenuItem Header="Fruits and Vegetables"/>
+                    <MenuItem Header="Animals" />
+                    <MenuItem Header="Cars" />
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Computer Science" />
+                <MenuItem Header="Biology" />
+                <MenuItem Header="History" />
+            </MenuItem>
+
+            <MenuItem Header="Help" 
+                      Background="#5A3A31"
+                      Foreground="#F5FBEF"
+                      FontSize="22"
+                      Command="{Binding HelpCommand}"></MenuItem>
+            <MenuItem Background="#5A3A31"></MenuItem>
+        </Menu>
+        <Label Content="Name" 
+               HorizontalAlignment="Left" 
+               Margin="41,0,0,0" 
+               Grid.Row="1" 
+               VerticalAlignment="Center"
+               Foreground="#042A2B"
+               FontSize="24"/>
+        <Label Content="{Binding TimeLabel, UpdateSourceTrigger=PropertyChanged}" 
+            HorizontalAlignment="Left" Margin="29,0,0,0" VerticalAlignment="Center" 
+               Name="label1" Width="147" Height="42" Grid.Column="1" Grid.Row="1"/>
+        <Image HorizontalAlignment="Left" 
+               Source="{Binding ImagePath}"
+               Height="200" 
+               Margin="40,40,0,0" 
+               Grid.Row="2" 
+               VerticalAlignment="Top" 
+               Width="209"/>
+        <Grid Grid.Column="1" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ContentControl MaxWidth="900" MaxHeight="360" x:Name="KeyboardContent"/>
+            <Button Content="A" 
+                    Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }"
+                    HorizontalAlignment="Left" 
+                    Margin="10,35,0,0" Grid.Row="3" 
+                    VerticalAlignment="Top" 
+                    FontSize="20" Width="45" 
+                    Foreground="#FFF5FBEF" 
+                    Height="34" 
+                    >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="B" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" 
+                    HorizontalAlignment="Left" 
+                    Margin="64,35,0,0"
+                    Grid.Row="3" 
+                    VerticalAlignment="Top" 
+                    FontSize="20" 
+                    Width="45" 
+                    Foreground="#FFF5FBEF" 
+                    Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="C" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="118,35,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="D" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="171,35,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="E" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="225,35,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="F" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="279,35,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="G" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="333,35,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="H" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="386,35,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="I" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="440,35,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="J" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="10,78,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="K" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="64,78,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="L" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="118,78,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="M" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="171,78,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="N" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="225,78,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="O" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="279,78,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="P" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="333,78,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="Q" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="386,78,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="R" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="440,78,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="S" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="41,122,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="T" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="95,122,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="U" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="149,122,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="V" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="202,122,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="46" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="W" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="256,122,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="X" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="310,122,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="Y" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="364,122,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="45" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Button Content="Z" Command="{Binding GetInputCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content }" HorizontalAlignment="Left" Margin="417,122,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="20" Width="46" Foreground="#FFF5FBEF" RenderTransformOrigin="1.151,0.541" Height="34">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5A3A31" Offset="0.135"/>
+                        <GradientStop Color="#FF042A2B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <Label Content="Category's Name:" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   RenderTransformOrigin="0.759,0.379"
+                   Foreground="#FF5A3A31"
+                   FontSize="20" 
+                   Width="500" 
+                   HorizontalContentAlignment="Center"/>
+            <Label Content="{Binding WordToBeGuessed, UpdateSourceTrigger=PropertyChanged}" 
+                   HorizontalAlignment="Center" 
+                   Grid.Row="1" 
+                   VerticalAlignment="Center"
+                   Foreground="#FF5A3A31"
+                   FontSize="35" 
+                   Width="500" 
+                   HorizontalContentAlignment="Center" RenderTransformOrigin="0.503,0.525" FontFamily="Arial" FontStretch="Medium" UseLayoutRounding="False"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Margin="119,13,0,0" VerticalAlignment="Top" Width="357" Grid.ColumnSpan="2" RenderTransformOrigin="0.255,7.372" Grid.Row="3" Height="40">
+            <Button Content="{Binding MissedShots[0]}" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="-0.271,0.479" Height="30" Width="40" Background="#FF40F99B">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0.256"/>
+                        <TranslateTransform X="0.006" Y="-0.172"/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button Content="{Binding MissedShots[1]}" HorizontalAlignment="Left" Margin="61,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="-0.271,0.479" Height="30" Width="40" Background="#FF40F99B">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0.256"/>
+                        <TranslateTransform X="0.006" Y="-0.172"/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button Content="{Binding MissedShots[2]}" HorizontalAlignment="Left" Margin="122,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="-0.271,0.479" Height="30" Width="40" Background="#FF40F99B">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0.256"/>
+                        <TranslateTransform X="0.006" Y="-0.172"/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button Content="{Binding MissedShots[3]}" HorizontalAlignment="Left" Margin="182,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="-0.271,0.479" Height="30" Width="40" Background="#FF40F99B">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0.256"/>
+                        <TranslateTransform X="0.006" Y="-0.172"/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button Content="{Binding MissedShots[4]}" HorizontalAlignment="Left" Margin="242,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="-0.271,0.479" Height="30" Width="40" Background="#FF40F99B">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0.256"/>
+                        <TranslateTransform X="0.006" Y="-0.172"/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button Content="{Binding MissedShots[5]}" HorizontalAlignment="Left" Margin="306,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="-0.271,0.479" Height="30" Width="40" Background="#FF40F99B">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0.256"/>
+                        <TranslateTransform X="0.006" Y="-0.172"/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+        </Grid>
+        <Label Content="Mistakes:" 
+               HorizontalAlignment="Left" 
+               Margin="14,0,0,0" 
+               Grid.Row="3" 
+               VerticalAlignment="Center" 
+               Foreground="#FF5A3A31"
+               FontSize="22"/>
+        <Label Content="Level: 1" 
+            HorizontalAlignment="Left" 
+            Margin="153,0,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Center"
+            Foreground="#042A2B"
+            FontSize="24" Grid.Column="1" Width="337" HorizontalContentAlignment="Right"/>
+
+    </Grid>
+
+
+</Window>
