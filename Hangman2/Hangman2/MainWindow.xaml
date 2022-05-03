@@ -21,7 +21,7 @@
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Menu Background="#9D69A3"
+        <Menu Background="#5A3A31"
               Grid.Row="0" 
               Grid.ColumnSpan="2">
             <Menu.ItemsPanel>
@@ -35,29 +35,36 @@
                       Foreground="#F5FBEF"
                       FontSize="22" >
                 <MenuItem Header="New Game" 
-                          Command="{Binding ReloadGame}"/>
-                <MenuItem Header="Open Game" />
-                <MenuItem Header="Save Game" />
+                          Command="{Binding ReloadGame}"
+                          Foreground="Black"/>
+                <MenuItem Header="Open Game" Foreground="Black"/>
+                <MenuItem Header="Save Game" Foreground="Black"/>
                 <Separator/>
-                <MenuItem Header="Statistics" />
+                <MenuItem Header="Statistics" Foreground="Black"/>
                 <Separator/>
                 <MenuItem Header="Exit" 
-                          Command="{Binding ExitCommand}"/>
+                          Command="{Binding ExitCommand}"
+                          Foreground="Black"/>
             </MenuItem>
 
             <MenuItem Header="Categories" 
                       Background="#5A3A31"
                       Foreground="#F5FBEF"
                       FontSize="22">
-                <MenuItem Header="+4 years">
-                    <MenuItem Header="Fruits and Vegetables"/>
-                    <MenuItem Header="Animals" />
-                    <MenuItem Header="Cars" />
+                <MenuItem Header="Easy" Foreground="Black">
+                    <MenuItem Header="Fruits and Vegetables" Command="{Binding FruitClick}"/>
+                    <MenuItem Header="Animals" Command="{Binding AnimalClick}" />
+                    <MenuItem Header="Cars" Command="{Binding CarClick}"/>
                 </MenuItem>
-                <Separator/>
-                <MenuItem Header="Computer Science" />
-                <MenuItem Header="Biology" />
-                <MenuItem Header="History" />
+                <MenuItem Header="Medium" Foreground="Black">
+                    <MenuItem Header="Movies" Command="{Binding MoviesClick}"/>
+                    <MenuItem Header="Mountains" Command="{Binding MountainsClick}"/>
+                    <MenuItem Header="Rivers" Command="{Binding RiversClick}"/>
+                </MenuItem>
+                <MenuItem Header="Hard" Foreground="Black">
+                    <MenuItem Header="Computer Science" Command="{Binding ComputerClick}"/>
+                    <MenuItem Header="Biology" Command="{Binding BiologyClick}"/>
+                </MenuItem>
             </MenuItem>
 
             <MenuItem Header="Help" 

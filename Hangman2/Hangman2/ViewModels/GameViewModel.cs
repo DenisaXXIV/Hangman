@@ -47,6 +47,38 @@ namespace Hangman2.ViewModels
             }
         }
         #endregion
+
+        #region Categories
+        public enum ECategories
+        {
+            ENone,
+            EFruitsAndVegetables,
+            EAnimals,
+            ECars,
+            EMovies,
+            EMountains,
+            ERivers,
+            EComputerScience,
+            EBiology,
+            EAllCategories
+        }
+
+        private ECategories m_categories;
+
+        public ECategories Category
+        {
+            get { return m_categories; }
+            set
+            {
+                if (value != null)
+                {
+                    m_categories = value;
+                }
+                OnPropertyChanged(nameof(Category));
+            }
+        }
+        #endregion
+
         #region ImageRegion
 
         private string m_ImagePath;
@@ -87,6 +119,15 @@ namespace Hangman2.ViewModels
         private ICommand m_Help;
         private ICommand m_exitGame;
         private ICommand m_timer;
+        private ICommand m_saveButton;
+        private ICommand m_fruitClick;
+        private ICommand m_animalClick;
+        private ICommand m_carClick;
+        private ICommand m_moviesClick;
+        private ICommand m_mountainsClick;
+        private ICommand m_riversClick;
+        private ICommand m_computerClick;
+        private ICommand m_biologyClick;
 
         #region Events
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -102,6 +143,18 @@ namespace Hangman2.ViewModels
                     m_GetInput = new RelayCommand(param => GetInput(param));
                 }
                 return m_GetInput;
+            }
+        }
+
+        public ICommand SaveGameCommand
+        {
+            get
+            {
+                if (m_saveButton == null)
+                {
+                    m_saveButton = new RelayCommand(param => SaveGame());
+                }
+                return m_saveButton;
             }
         }
 
@@ -152,7 +205,162 @@ namespace Hangman2.ViewModels
                 return m_timer;
             }
         }
+
+        public ICommand FruitClick
+        {
+            get
+            {
+                if (m_fruitClick == null)
+                {
+                    m_fruitClick = new RelayCommand(p => Fruit());
+                }
+                return m_fruitClick;
+            }
+        }
+
+        public ICommand AnimalClick
+        {
+            get
+            {
+                if (m_animalClick == null)
+                {
+                    m_animalClick = new RelayCommand(p => Animal());
+                }
+                return m_animalClick;
+            }
+        }
+
+        public ICommand CarClick
+        {
+            get
+            {
+                if (m_carClick == null)
+                {
+                    m_carClick = new RelayCommand(p => Car());
+                }
+                return m_carClick;
+            }
+        }
+
+        public ICommand MoviesClick
+        {
+            get
+            {
+                if (m_moviesClick == null)
+                {
+                    m_moviesClick = new RelayCommand(p => Movies());
+                }
+                return m_moviesClick;
+            }
+        }
+
+        public ICommand MountainsClick
+        {
+            get
+            {
+                if (m_mountainsClick == null)
+                {
+                    m_mountainsClick = new RelayCommand(p => Mountains());
+                }
+                return m_mountainsClick;
+            }
+        }
+
+        public ICommand RiversClick
+        {
+            get
+            {
+                if (m_riversClick == null)
+                {
+                    m_riversClick = new RelayCommand(p => Rivers());
+                }
+                return m_riversClick;
+            }
+        }
+
+        public ICommand ComputerClick
+        {
+            get
+            {
+                if (m_computerClick == null)
+                {
+                    m_computerClick = new RelayCommand(p => Computer());
+                }
+                return m_computerClick;
+            }
+        }
+
+        public ICommand BiologyClick
+        {
+            get
+            {
+                if (m_biologyClick == null)
+                {
+                    m_biologyClick = new RelayCommand(p => Biology());
+                }
+                return m_biologyClick;
+            }
+        }
         #endregion
+
+        #region Categories
+        public void Biology()
+        {
+            Game.Option = "Biology";
+            Game.Reread();
+            ReloadGameMethod();
+        }
+
+        public void Computer()
+        {
+            Game.Option = "Computer";
+            Game.Reread();
+            ReloadGameMethod();
+        }
+
+        public void Rivers()
+        {
+            Game.Option = "Rivers";
+            Game.Reread();
+            ReloadGameMethod();
+        }
+
+        public void Mountains()
+        {
+            Game.Option = "Mountains";
+            Game.Reread();
+            ReloadGameMethod();
+        }
+
+        public void Movies()
+        {
+            Game.Option = "Movies";
+            Game.Reread();
+            ReloadGameMethod();
+        }
+
+        public void Car()
+        {
+            Game.Option = "Car";
+            Game.Reread();
+            ReloadGameMethod();
+        }
+
+        public void Animal()
+        {
+            Game.Option = "Animal";
+            Game.Reread();
+            ReloadGameMethod();
+        }
+
+        public void Fruit()
+        {
+            Game.Option = "Fruit";
+            Game.Reread();
+            ReloadGameMethod();
+        }
+        #endregion
+
         #region MissedLetters
         private List<string> m_missedShots;
         public List<string> MissedShots
@@ -226,6 +434,11 @@ namespace Hangman2.ViewModels
         }
 
         public void TimerMethod()
+        {
+
+        }
+
+        public void SaveGame()
         {
 
         }

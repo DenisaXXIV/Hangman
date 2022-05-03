@@ -23,11 +23,13 @@ namespace Hangman2.Models
         public static string ImagePath { get; set; }
 
         private static List<string> readWords = new List<string>();
+        public static string Option { get; set; }
 
         static Game()
         {
+            Option = "Computer";
             GuessedWord = String.Empty;
-            readWords = Utility.FileReader.ReadWords();
+            readWords = Utility.FileReader.ReadWords(Option);
 
             PickRandomWord();
             ImagePath = FIRST_IMAGE_PATH;
@@ -67,6 +69,12 @@ namespace Hangman2.Models
                 GameStatus = GameState.Winner;
                 MessageBox.Show(WIN_MESSAGE);
             }
+        }
+
+        public static void Reread()
+        {
+            readWords = Utility.FileReader.ReadWords(Option);
+            PickRandomWord();
         }
 
         public static void ChangeImage()
